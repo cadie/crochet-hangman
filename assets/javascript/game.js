@@ -25,7 +25,7 @@ var hangman = {
     var key = event.key;
     if(event.keyCode >= 65 && event.keyCode <= 90){ //only runs if the key pressed was a letter
       hangman.currentUserGuess = event.key;
-      hangman.chooseWord();
+      var chosenWord = hangman.displayHiddenWord(hangman.chooseWord()); //store
       hangman.playGame();
       hangman.printResults();
     }
