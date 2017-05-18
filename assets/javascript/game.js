@@ -5,7 +5,7 @@ var wordList = ["needle", "hook", "yarn", "wool", "cotton", "handmade", "blanket
 var userGuesses = [];
 var winCount = 0;
 var lossCount = 0;
-var guesses = 9;
+var guesses = 8;
 
 // selects a random word from the words array and returns it to the function
 function selectWord(){
@@ -31,10 +31,21 @@ console.log(selectedWord);
 $('#current-word').html(hiddenWord);
 
 $(document).keyup(function(event) {//runs whenever a key is pressed
-  var userKey = (event.key);
-  userGuesses.push(userKey);
-  displayGuess();
+  if (event.which >= 65 && event.which <= 90){
+    var userKey = (event.key);
+    userGuesses.push(userKey);
+    displayGuess();
+    updateGuesses();
+  }
 });
+
+function updateGuesses(){
+  guesses--;
+  $('#lives-left').html(guesses);
+  if (guesses === 0){
+    alert("you lose");
+  }
+}
 
 function displayGuess() {
   var workingWord = "";
@@ -49,7 +60,7 @@ function displayGuess() {
     }
     if (foundLetter === false) {
       workingWord+="_ ";
-      $('#incorrect-letters').append(event.key);
+      $('#incorrect-letters').append(event.key + " ");
     }
     foundLetter = false;
   }
