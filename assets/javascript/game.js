@@ -44,7 +44,19 @@ function updateGuesses(){
   $('#lives-left').html(guesses);
   if (guesses === 0){
     alert("you lose");
+    addLosses();
   }
+}
+
+function addLosses(){
+  lossCount++;
+  $('#losses').html(lossCount);
+  newGame();
+}
+
+// this function will reset the game. choose a new word, reset remaining guesses count, reset incorrect letter div while leaving the wins and loss count
+function newGame(){
+
 }
 
 function displayGuess() {
