@@ -1,0 +1,82 @@
+html{
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+img.background-img {
+    max-width: 50%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+}
+.header {
+  margin-top:60px;
+}
+
+h1 {
+  font-family: 'Homemade Apple', cursive;
+  font-size: 6rem;
+  color: #e83f60;
+}
+h2 {
+  text-transform: uppercase;
+  font-size: 4.5rem;
+  font-weight: bold;
+  margin-top: -15px;
+  letter-spacing: 5px;
+  color: #f79374;
+}
+.header p {
+    margin-top: 10px;
+    font-style: italic;
+}
+a.btn {
+    background: #e83f60;
+    color: #fff;
+    border-radius: 0;
+    padding: 10px 30px;
+    border: 2px solid #e83f60;
+    font-size: 1.125rem;
+}
+.btn.focus, .btn:focus, .btn:hover {
+    color: #e83f60;
+    text-decoration: none;
+    background: white;
+}
+.content {
+    margin-top: 40px;
+}
+p.information {
+    font-weight: bold;
+    margin-top:5px;
+}
+p.lives-left {
+    margin-top: 20px;
+}
+p.information>span {
+    color: #f79374;
+    font-size: 1.5rem;
+}
+.letters-guessed-container {
+    background: #eee;
+    width: 100%;
+    margin-top: 30px;
+    min-height: 200px;
+}
+.letters-guessed-container h3 {
+    text-align: center;
+    border-bottom: 2px solid #c32b49;
+    padding: 10px 0;
+    width: 100%;
+    background: #e83f60;
+    color: #fff;
+}
+div#incorrect-letters {
+    padding: 10px;
+}
+div#current-word {
+    font-size: 3rem;
+    text-align: left;
+    color: #e83f60;
+    font-weight: bold;
+}

@@ -1,45 +1,59 @@
+$(document).ready(function(){
 
-var hangman = {
-  words: ["needle", "hook", "yarn", "wool", "cotton", "handmade", "blanket", "afghan", "craft"],
-  wins: 0,
-  losses: 0,
-  guessesRemaining: 8,
-  rightGuesses: 0,
-  currentUserGuess: "",
-  //computer chooses random word from words array
-  chooseWord: function() {
-    return hangman.words[Math.floor(Math.random() * hangman.words.length)];
-  },
-  //rewrite chosen word with underscores for as many characters are in the word
-  displayHiddenWord: function(answerWord) {
-      var wordLength = answerWord.length;
-      var result = "";
-      for (var i = 0; i<wordLength; i++){
-        result = "_ " + result;
-      }
-      return result;
-  },
-  //handles the user key guess
-  handleUserGuess: function(event){
-    hangman.displayHiddenWord(hangman.chooseWord());
-    var key = event.key;
-    if(event.keyCode >= 65 && event.keyCode <= 90){ //only runs if the key pressed was a letter
-      hangman.currentUserGuess = event.key;
-      var chosenWord = hangman.displayHiddenWord(hangman.chooseWord()); //store
-      hangman.playGame();
-      hangman.printResults();
-    }
-  },
-  printResults: function(){
-    document.querySelector(".wins").innerHTML = hangman.wins;
-    document.querySelector(".losses").innerHTML = hangman.losses;
-    document.querySelector(".guesses-remaining").innerHTML = hangman.guessesRemaining;
-  },
-  playGame: function(){
-    // if (rps.currentComputerGuess === rps.currentUserGuess){
-    //   rps.ties++;
-    // }
+// Array of words that are chosen for the hangman game
+var wordList = ["needle", "hook", "yarn", "wool", "cotton", "handmade", "blanket", "afghan", "craft", "double crochet", "coasters"];
+var userGuesses = [];
+var winCount = 0;
+var lossCount = 0;
+var guesses = 9;
+
+// selects a random word from the words array and returns it to the function
+function selectWord(){
+  return wordList[Math.floor(Math.random() * wordList.length)];
+}
+// sets the computer chosen word to the variable chosenWord
+var selectedWord = selectWord();
+
+// returns underscores for all of the characters in the computer selected word that is passed as a parameter when the function is called
+function answerBlanks(answerWord) {
+  var wordLength = answerWord.length;
+  var result = "";
+  for (var i = 0; i<wordLength; i++){
+    result = "_ " + result;
   }
+  return result;
+}
+// set a variable for the computer selected word displayed with underscores
+var hiddenWord = answerBlanks(selectedWord);
+console.log(selectedWord);
+
+// writes the hiddenWord into the div in the html
+$('#current-word').html(hiddenWord);
+
+$(document).keyup(function(event) {//runs whenever a key is pressed
+  var userKey = (event.key);
+  userGuesses.push(userKey);
+  displayGuess();
+});
+
+function displayGuess() {
+  var workingWord = "";
+  for (var i = 0; i < selectedWord.length; i++) {
+    var letter = selectedWord[i];
+    var foundLetter = false;
+    for (var j = 0; j < userGuesses.length; j++) {
+      if (userGuesses[j] === letter){
+        workingWord += letter + " ";
+        foundLetter = true;
+      }
+    }
+    if (foundLetter === false) {
+      workingWord+="_ ";
+      $('#incorrect-letters').append(event.key);
+    }
+    foundLetter = false;
+  }
+  $('#current-word').html(workingWord);
 };
 
-document.onkeyup = hangman.handleUserGuess;
+});
